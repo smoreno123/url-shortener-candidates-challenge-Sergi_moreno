@@ -40,10 +40,10 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const actionData = useActionData<typeof action>();
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-lime-400 via-pink-500 to-cyan-300">
-      <div className="bg-yellow-300 p-12 rounded-none border-8 border-dashed border-purple-600 w-full max-w-lg rotate-1 shadow-2xl shadow-red-500">
-        <h1 className="text-4xl font-mono italic text-center mb-8 text-fuchsia-600 underline decoration-wavy decoration-green-500 tracking-widest">
-          ~*~ URL Shortener ~*~
+    <main className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="bg-gray-100 p-12 rounded-none border border-gray-300 w-full max-w-lg shadow-2xl shadow-red-500">
+        <h1 className="text-4xl font-mono italic text-center mb-8 text-black tracking-widest">
+          URL Shortener
         </h1>
 
         <Form method="post" className="flex flex-col gap-6">
@@ -69,7 +69,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
         </Form>
 
         {actionData?.shortenedUrl && (
-          <div className="mt-8 p-4 bg-violet-400 rounded-3xl border-4 border-double border-yellow-500 -rotate-1">
+          <div className="mt-8 p-4 bg-violet-400 rounded-3xl border-4 border-double border-yellow-500">
             <p className="text-lg text-lime-300 mb-2 font-black uppercase">
               Your shortened URL:
             </p>
@@ -77,7 +77,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
               href={actionData.shortenedUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-red-200 break-all font-mono text-xl hover:text-blue-900 bg-pink-600 p-2 block"
+              className="text-black break-all font-mono text-xl bg-white p-2 block"
             >
               {actionData.shortenedUrl}
             </a>

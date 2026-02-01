@@ -1,6 +1,7 @@
 // Map que almacena los códigos cortos → URLs originales
 // Estructura: {"abc123": "https://example.com", ...}
 import { RedisMock } from "./storage/redis-mock";
+import { saveUrlToDatabase } from "./storage/database";
 
 // Usamos dos "namespaces" simulados en Redis: código->url y url->código
 const codeStore = new RedisMock();
@@ -56,6 +57,7 @@ export async function clearMaps(): Promise<void> {
 /**
  * Acorta una URL o retorna el código existente si ya fue acortada
  * Garantiza que no haya URLs duplicadas
+ * Persiste la URL y estadísticas en Postgres
  */
 export async function addUrl(url: string): Promise<string> {
   const existingCode = await urlStore.get(url);
@@ -66,6 +68,10 @@ export async function addUrl(url: string): Promise<string> {
   const code = await generateShortCode();
   await codeStore.set(code, url);
   await urlStore.set(url, code);
+  
+  // Guardar en Postgres para persistencia y estadísticas
+  await saveUrlToDatabase(code, url);
 
   return code;
+}
 }

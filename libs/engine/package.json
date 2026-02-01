@@ -10,14 +10,20 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate"
   },
   "exports": {
     ".": "./src/index.ts"
   },
+  "dependencies": {
+    "@prisma/client": "^5.8.0"
+  },
   "devDependencies": {
     "@types/node": "^22.19.7",
     "typescript": "^5.9.3",
-    "vitest": "^2.0.0"
+    "vitest": "^2.0.0",
+    "prisma": "^5.8.0"
   }
 }
