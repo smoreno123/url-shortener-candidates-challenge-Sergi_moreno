@@ -21,7 +21,7 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   // Usar la función addUrl que evita duplicados y guarda automáticamente
-  const shortCode = addUrl(url);
+  const shortCode = await addUrl(url);
 
   return {
     shortenedUrl: `${baseUrl}/s/${shortCode}`,
