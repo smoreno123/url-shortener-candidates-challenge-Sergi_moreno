@@ -2,8 +2,7 @@ import { Form, useActionData } from "react-router";
 import type { Route } from "./+types/_index";
 import {
   baseUrl,
-  shortenedUrls,
-  generateShortCode,
+  addUrl,
 } from "@url-shortener/engine";
 
 export function loader() {
@@ -16,13 +15,13 @@ export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
   const url = formData.get("url") as string;
 
+  // Validación: URL requerida
   if (!url) {
     return { error: "URL is required" };
   }
 
-  const shortCode = generateShortCode();
-
-  shortenedUrls.set(shortCode, url);
+  // Usar la función addUrl que evita duplicados y guarda automáticamente
+  const shortCode = addUrl(url);
 
   return {
     shortenedUrl: `${baseUrl}/s/${shortCode}`,
